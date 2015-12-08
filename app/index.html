@@ -1,0 +1,117 @@
+<!doctype html>
+<html ng-app="ngApp">
+    <head>
+        <meta charset="utf-8">
+        <title ng-bind="title"></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400,300,700">  
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.) styles/vendor.css -->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="bower_components/ladda/dist/ladda.min.css" />
+        <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
+        <link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
+        <link rel="stylesheet" href="bower_components/select2/select2.css" />
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link href="styles/theme-default.css" rel="stylesheet" />
+        <link href="styles/story.css" rel="stylesheet" />
+        <!-- endbuild -->
+    </head>
+    <body ng-controller="AppCtrl"  class="{{bodyClass}}">
+        <!--[if lte IE 8]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!-- header -->
+        <header class="topnavbar-wrapper" ng-include src="'views/includes/header.html'"></header>
+        <!-- end header -->
+
+        <div class="main-container">
+            <!-- sidebar -->
+            <!-- <div ng-show="currentUser" id="sidebar" class="sidebar" ng-include src="'views/includes/sidebar.html'"></div> -->
+            <div id="sidebar" class="sidebar" ng-include src="'views/includes/sidebar.html'"></div>
+            <!-- end sidebar -->
+
+            <ui-view></ui-view>
+
+            <!-- footer -->
+            <footer ng-include src="'views/includes/footer.html'"></footer>
+            <!-- end footer -->
+        </div> 
+
+    <wn-spinner></wn-spinner>
+    <toaster-container toaster-options="{'position-class': 'toast-bottom-right'}"></toaster-container>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/angular-cache/dist/angular-cache.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/ladda/dist/ladda.min.js"></script>
+    <script src="bower_components/angular-ladda/dist/angular-ladda.min.js"></script>
+    <script src="bower_components/x2js/xml2json.min.js"></script>
+    <script src="bower_components/angular-x2js/dist/x2js.min.js"></script>
+    <script src="bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
+    <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+    <script src="bower_components/tinymce-dist/tinymce.min.js"></script>
+    <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+    <script src="bower_components/ui-select/dist/select.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/select2/select2.js"></script>
+    <script src="bower_components/angular-ui-select2/src/select2.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->        
+    <script src="scripts/app.js"></script>
+    <!-- libraries -->
+    <script src="scripts/lib/jquery.metisMenu.js"></script>
+    <script src="scripts/lib/custom.js"></script>
+    <!-- will remove -->
+    <script src="scripts/lib/tmpData.js"></script>
+    <!-- services -->
+    <script src="scripts/services/constant.js"></script>
+    <script src="scripts/services/user.js"></script>
+    <script src="scripts/services/APIInterceptor.js"></script>
+    <script src="scripts/services/dataWrapper.js"></script>
+    <script src="scripts/services/config.js"></script>
+    <script src="scripts/services/story.js"></script>
+    <!-- controller -->
+    <script src="scripts/controllers/app.js"></script>
+    <script src="scripts/controllers/home.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/theme.js"></script>
+    <script src="scripts/controllers/search/form.js"></script>
+    <script src="scripts/controllers/password/forgot.js"></script>
+    <script src="scripts/controllers/password/reset.js"></script>
+    <script src="scripts/controllers/password/change.js"></script>
+    <script src="scripts/controllers/story/add.js"></script>
+    <!-- directives -->
+    <script src="scripts/directives/directives.js"></script>
+    <script src="scripts/directives/spinner.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

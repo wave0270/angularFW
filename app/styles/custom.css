@@ -1,0 +1,10 @@
+#treeview{
+    margin: 0; padding: 0;
+    list-style: none;
+}
+#treeview ul{
+    list-style: none;
+    padding-left: 25px;
+}
+#treeview li{padding: 5px 0; }
+#treeview .branch i{margin-right: 5px;}

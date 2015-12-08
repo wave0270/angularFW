@@ -1,0 +1,185 @@
+<div class="main-content">
+    <div class="main-content-inner">
+        <div id="breadcrumbs" class="breadcrumbs">
+            <span ng-show="isShowSidebar" class="pull-left hidden-xs hidden-sm">
+                <a href="" class="btn-navicon menu-collapse"><i class="fa fa-navicon"></i></a>
+            </span>
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="">Home</a>
+                </li>
+                <li class="active">Image Library</li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="bodyContent">
+            <section style="padding-bottom: 15px;">
+                <div class="text-right">
+                    <button class="btn btn-default">
+                        <i class="glyphicon glyphicon-plus"></i> Add folder
+                    </button>
+                    <button class="btn btn-default btn-sm">
+                        <i class="glyphicon glyphicon-upload"></i> Upload images
+                    </button>
+
+                    <button class="btn btn-default btn-sm" ng-click="$parent.setTemplate('main-icons.html')" ng-show="$parent.viewTemplate !== 'main-icons.html'" title="Icons">
+                        <i class="glyphicon glyphicon-th-large"></i>
+                    </button>
+                    <button class="btn btn-default btn-sm ng-hide" ng-click="$parent.setTemplate('main-table.html')" ng-show="$parent.viewTemplate !== 'main-table.html'" title="List">
+                        <i class="glyphicon glyphicon-th-list"></i>
+                    </button>
+
+                </div>
+            </section>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <section class="boxed-default">
+                        <div class="boxed-header"><span class="pull-right">12 total <i class="fa fa-info-circle colblue"></i></span><h3>FOLDERS</h3></div>
+                        <div class="boxed-body">
+                            <ul id="treeview" class="tree">
+                                <li class="branch" style="display: list-item;"><i class="indicator glyphicon glyphicon-folder-close"></i> /
+                                    <ul>
+                                        <li class="branch"><i class="indicator glyphicon glyphicon-folder-open"></i> TECH
+
+                                            <ul>
+                                                <li class="branch" style="display: list-item;"><i class="indicator glyphicon glyphicon-folder-close"></i>Employees
+                                                    <ul>
+                                                        <li style="display: none;">Employee Maint.</li>
+                                                    </ul>
+                                                </li>
+                                                <li style="display: list-item;"><i class="indicator glyphicon glyphicon-folder-close"></i> Human Resources</li>
+                                            </ul>
+                                        </li>
+                                        <li class="branch"><i class="indicator glyphicon glyphicon-folder-open"></i> XRP
+                                            <ul>
+                                                <li style="display: list-item;"><i class="indicator glyphicon glyphicon-folder-close"></i> Company Maintenance</li>
+                                                <li class="branch" style="display: list-item;"><i class="indicator glyphicon glyphicon-folder-open"></i>Employees
+                                                    <ul>
+                                                        <li class="branch" style="display: list-item;"><i class="indicator glyphicon glyphicon-folder-close"></i>Reports
+                                                            <ul>
+                                                                <li><i class="indicator glyphicon glyphicon-folder-close"></i> Report1</li>
+                                                                <li><i class="indicator glyphicon glyphicon-folder-close"></i> Report2</li>
+                                                                <li><i class="indicator glyphicon glyphicon-folder-close"></i> Report3</li>
+                                                            </ul>
+                                                        </li>
+                                                        <li style="display: list-item;"><i class="indicator glyphicon glyphicon-folder-close"></i> Employee Maint.</li>
+                                                    </ul>
+                                                </li>
+                                                <li style="display: list-item;"><i class="indicator glyphicon glyphicon-folder-close"></i> Human Resources</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-9">
+                    <section class="boxed-default">
+                        <div class="boxed-header">  
+                            <ol class="breadcrumb mb0 ng-scope" style="margin: 0; padding: 0;">
+                                <li>
+                                    <a href="" ng-click="fileNavigator.goTo(-1)">
+                                        <i class="glyphicon glyphicon-folder-open mr2"></i>
+                                    </a>
+                                </li>
+                                <li ng-class="{'active':$last}" class="animated fast fadeIn ng-scope">
+                                    <a href="" ng-show="!$last" ng-click="fileNavigator.goTo(key)" class="ng-binding">
+                                        <i class="glyphicon glyphicon-folder-open mr2"></i> TECH
+                                    </a>
+                                    <span ng-show="$last" class="ng-binding ng-hide"><i class="glyphicon glyphicon-folder-open mr2"></i>  phpMyAdmin</span>
+                                </li>
+                                <li><button class="btn btn-primary btn-xs" ng-click="fileNavigator.upDir()">↵</button></li>
+                            </ol>
+                        </div>
+                        <div class="boxed-body">
+                            <table class="table mb0 table-files">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <a href="" ng-click="order('model.name')">
+                                                Item name
+                                                <span class="sortorder" ng-show="predicate[1] === 'model.name'" ng-class="{reverse:reverse}"></span>
+                                            </a>
+                                        </th>
+                                        <th class="hidden-xs">
+                                            <a href="" ng-click="order('model.size')">
+                                                Size
+                                                <span class="sortorder" ng-show="predicate[1] === 'model.size'" ng-class="{reverse:reverse}"></span>
+                                            </a>
+                                        </th>
+                                        <th class="hidden-sm hidden-xs">
+                                            <a href="" ng-click="order('model.date')">
+                                                Created
+                                                <span class="sortorder" ng-show="predicate[1] === 'model.date'" ng-class="{reverse:reverse}"></span>
+                                            </a>
+                                        </th>
+                                        <th class="hidden-sm hidden-xs">
+                                            <a href="" ng-click="order('model.date')">
+                                                Modified
+                                                <span class="sortorder" ng-show="predicate[1] === 'model.date'" ng-class="{reverse:reverse}"></span>
+                                            </a>
+                                        </th>
+                                        <th class="text-right"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="file-item">
+                                    <tr ng-show="fileNavigator.requesting">
+                                        <td colspan="5">
+                                            <div ng-include="config.tplPath + '/spinner.html'"></div>
+                                        </td>
+                                    </tr>
+                                    <tr ng-show="!fileNavigator.requesting && fileNavigator.fileList.length < 1 && !fileNavigator.error">
+                                        <td colspan="5">
+                                            no_files_in_folder
+                                        </td>
+                                    </tr>
+                                    <tr ng-show="!fileNavigator.requesting && fileNavigator.error">
+                                        <td colspan="5">
+                                            {{ fileNavigator.error}}
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="item in fileNavigator.fileList">
+                                        <td ng-right-click="touch(item)">
+                                            <a href="" ng-click="smartClick(item)" title="{{item.name}} ({{item.sizeKb()}}kb)">
+                                                <i class="glyphicon glyphicon-folder-close" ng-show="item.type === 'dir'"></i>
+                                                <i class="glyphicon glyphicon-file" ng-show="item.type === 'file'"></i>
+                                                {{item.name}}
+                                            </a>
+                                        </td>
+                                        <td class="hidden-xs">
+                                            {{sizeKb(item.size)}}
+                                        </td>
+                                        <td class="hidden-sm hidden-xs">
+                                            {{item.date| formatDate}}
+                                        </td>
+                                        <td class="hidden-sm hidden-xs">
+                                            {{item.date| formatDate}}
+                                        </td>
+                                        <td class="text-right">
+                                            <button class="btn btn-sm btn-default"  title="Edit">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-default"  title="Move to...">
+                                                <i class="fa fa-arrows"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-default"  title="Copy url">
+                                                <i class="fa fa-link"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger"  title="Remove">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

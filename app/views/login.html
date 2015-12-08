@@ -1,0 +1,41 @@
+<div class="wploginForm">
+    <h1 class="headding-login">Login System</h1>
+    <form name="frm" class="form-horizontal login-form" method="post" ng-submit="submit()" novalidate>
+        <div class="form-group" ng-class="{ 'has-error' : submitted && loginForm.username.$invalid}">
+            <div class="form-group" ng-class="{ 'has-error': (frm.$submitted || frm.username.$touched) && frm.username.$invalid}">
+                <label for="username" class="col-xs-3 col-sm-3 control-label">Username</label>
+                <div class="col-xs-9 col-sm-9">
+                    <div class="itemField">
+                        <i class="fa fa-user"></i>
+                        <input type="text" id="username" class="form-control" name="username" ng-model="credentials.username" placeholder="" ng-minlength="4" required="" autofocus/>
+                    </div>
+                    <p class="help-block error" ng-show="(frm.$submitted || frm.username.$touched) && frm.username.$error.required">{{constant.FORM_ERROR_REQUIRED}}</p>
+                    <p class="help-block error" ng-show="(frm.$submitted || frm.username.$touched) && frm.username.$error.minlength">{{constant.FORM_ERROR_USERNAME_MIN_LENGTH_4}}</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': (frm.$submitted || frm.password.$touched) && frm.password.$invalid}">
+                <label for="password" class="col-xs-3 col-sm-3 control-label">Password</label>
+                <div class="col-xs-9 col-sm-9">
+                    <div class="itemField">
+                        <i class="fa fa-key"></i>
+                        <input type="password" ng-trim="false" id="password" class="form-control"
+                               name="password"
+                               ng-model="credentials.password" placeholder="" ng-minlength="6" required/>
+                    </div>
+                    <p class="help-block error" ng-show="(frm.$submitted || frm.password.$touched) && frm.password.$error.required">{{constant.FORM_ERROR_REQUIRED}}</p>
+                    <p class="help-block error" ng-show="(frm.$submitted || frm.password.$touched) && frm.password.$error.minlength">{{constant.FORM_ERROR_PASSWORD_MIN_LENGTH_6}}</p>
+                </div>
+            </div>       
+            <div class="form-group has-error" ng-show="frm.$submitted && error">
+                <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9">
+                    <p class="help-block error">{{error}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9">
+                    <p class="txt-forgot-pass"><a href="#/forgot-password">Forgot your password?</a></p>
+                    <button type="submit" class="btn btn-submit" ladda="loading">Login</button>
+                </div>
+            </div>            
+    </form>
+</div>

@@ -1,0 +1,28 @@
+<div class="wploginForm">
+    <h1 class="headding-login">Forgot pasword</h1>
+    <p>To retrieve a new password, fill in your user name and then select reset password. An email with a reset link will be sent to the address we have on file for you.</p><br/>
+    <form name="frm" class="form-horizontal frm-resetPass" method="post" ng-submit="submit()" novalidate autocomplete="off">
+        <div class="form-group" ng-class="{ 'has-error': (frm.$submitted || frm.username.$touched) && frm.username.$invalid}">
+            <label for="username" class="col-xs-3 col-sm-3 control-label">Username</label>
+            <div class="col-xs-9 col-sm-9">
+                <div class="itemField">
+                    <i class="fa fa-user"></i>
+                    <input type="text" class="form-control" ng-model="username" name="username" ng-minlength="4" required=""/>
+                </div>
+                <p class="help-block error" ng-show="(frm.$submitted || frm.username.$touched) && frm.username.$error.required">{{constant.FORM_ERROR_REQUIRED}}</p>
+                <p class="help-block error" ng-show="(frm.$submitted || frm.username.$touched) && frm.username.$error.minlength">{{constant.FORM_ERROR_USERNAME_MIN_LENGTH_4}}</p>
+            </div>
+        </div> 
+        <div class="form-group has-error" ng-show="frm.$submitted && error">
+            <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9">
+                <p class="help-block error">{{error}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-submit" ladda="loading">Continue</button>
+                <button ng-click="cancel();" type="button" class="btn btn-submit bnt-cancel">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

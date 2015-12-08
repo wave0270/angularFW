@@ -1,0 +1,69 @@
+<div class="wploginForm">
+    <div ng-show="step === 'confirmation'">
+        <h1 class="headding-login">Confirmation</h1>
+        <p>Confirmation code has been sent to your email. Please enter your code.</p><br/>
+        <form name="frmConfirmation" class="form-horizontal frm-resetPass" method="post" ng-submit="confirmationSubmit();" novalidate autocomplete="off">
+            <div class="form-group" ng-class="{ 'has-error': (frmConfirmation.$submitted || frmConfirmation.resetToken.$touched) && frmConfirmation.resetToken.$invalid}">
+                <label for="resetToken" class="col-xs-3 col-sm-3 control-label">Code</label>
+                <div class="col-xs-9 col-sm-9"> 
+                    <div>
+                        <input type="text" class="form-control" name="resetToken" ng-model="resetToken" required="" autocomplete="off"/>
+                    </div>
+                    <p class="help-block error" ng-show="(frmConfirmation.$submitted || frmConfirmation.resetToken.$touched) && frmConfirmation.resetToken.$error.required">{{constant.FORM_ERROR_REQUIRED}}</p>
+                    <!--<p class="help-block error" ng-show="(frmResetPassword.$submitted || frmConfirmation.resetToken.$touched) && frmConfirmation.password.$error.minlength">{{constant.FORM_ERROR_PASSWORD_MIN_LENGTH_6}}</p>-->
+                </div>
+            </div> 
+            <div class="form-group has-error" ng-show="frmConfirmation.$submitted && error">
+                <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9">
+                    <p class="help-block error">{{error}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9">
+                    <button type="submit" class="btn btn-submit" ladda="loading">Continue</button>
+                    <button type="button" class="btn btn-submit bnt-cancel" ng-click="cancel();">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div ng-show="step === 'reset'">
+        <h1 class="headding-login">Reset password</h1>
+        <p>Please enter new password to create.</p><br/>
+        <form name="frmResetPassword" class="form-horizontal frm-resetPass" method="post" autocomplete="off" ng-submit="resetPasswordSubmit();" novalidate>
+            <div class="form-group" ng-class="{ 'has-error': (frmResetPassword.$submitted || frmResetPassword.password.$touched) && frmResetPassword.password.$invalid}">
+                <label for="password" class="col-xs-4 col-sm-4 control-label">New Password</label>
+                <div class="col-xs-8 col-sm-8">
+                    <div class="itemField">
+                        <i class="fa fa-key"></i>
+                        <input type="password" name="password" id="uPassword" ng-model="password" class="form-control" required="" ng-minlength="6" autocomplete="off"/>
+                    </div>
+                    <p class="help-block error" ng-show="(frmResetPassword.$submitted || frmResetPassword.password.$touched) && frmResetPassword.password.$error.required">{{constant.FORM_ERROR_REQUIRED}}</p>
+                    <p class="help-block error" ng-show="(frmResetPassword.$submitted || frmResetPassword.password.$touched) && frmResetPassword.password.$error.minlength">{{constant.FORM_ERROR_PASSWORD_MIN_LENGTH_6}}</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': (frmResetPassword.$submitted || frmResetPassword.repeatPassword.$touched) && frmResetPassword.repeatPassword.$invalid}">
+                <label for="newpassword" class="col-xs-4 col-sm-4 control-label">Confirm New Password</label>
+                <div class="col-xs-8 col-sm-8">
+                    <div class="itemField">
+                        <i class="fa fa-key"></i>
+                        <input type="password" name="repeatPassword" ng-model="repeatPassword" class="form-control" required="" ng-minlength="6" ng-compare="uPassword" autocomplete="off"/>
+                    </div>
+                    <p class="help-block error" ng-show="(frmResetPassword.$submitted || frmResetPassword.repeatPassword.$touched) && frmResetPassword.repeatPassword.$error.required">{{constant.FORM_ERROR_REQUIRED}}</p>
+                    <p class="help-block error" ng-show="(frmResetPassword.$submitted || frmResetPassword.repeatPassword.$touched) && frmResetPassword.repeatPassword.$error.minlength">{{constant.FORM_ERROR_PASSWORD_MIN_LENGTH_6}}</p>
+                    <p class="help-block error" ng-show="(frmResetPassword.$submitted || frmResetPassword.repeatPassword.$touched) && frmResetPassword.password.$valid && frmResetPassword.repeatPassword.$error.ngcompare">{{constant.FORM_ERROR_PASSWORDS_DO_NOT_MATCH}}</p>
+                </div>
+            </div> 
+            <div class="form-group has-error" ng-show="frmResetPassword.$submitted && error">
+                <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9">
+                    <p class="help-block error">{{error}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class=" col-xs-12 col-sm-offset-4 col-sm-8">
+                    <button type="submit" class="btn btn-submit" ladda="loading">Resset Password</button>
+                    <button type="button" class="btn btn-submit bnt-cancel" ng-click="cancel();">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

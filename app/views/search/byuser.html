@@ -1,0 +1,18 @@
+<div class="form-group">
+	<label class="col-sm-3">Created by</label>
+	<div class="col-sm-5">
+		<select name="CreatedBy" id="CreatedBy" ng-options="createdBy.id as createdBy.name for createdBy in listUser"
+			class="select-single form-control" ng-model="createdBy">
+			
+		</select>
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-3">Last Modified by</label>
+	<div class="col-sm-5">
+		<select name="LastEditedBy" id="LastEditedBy"  ng-options="lastModifiedBy.id as lastModifiedBy.name for lastModifiedBy in listUser"
+			ng-model="lastModifiedBy"
+			class="select-single form-control">			
+		</select>
+	</div>
+</div>

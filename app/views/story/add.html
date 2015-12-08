@@ -1,0 +1,428 @@
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <div id="breadcrumbs" class="breadcrumbs">
+            <span class="pull-left hidden-xs hidden-sm">
+                <a href="#" class="btn-navicon menu-collapse"><i class="fa fa-navicon"></i></a>
+            </span>
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="active">Dashboard</li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <form name="StoryAddForm" method="post" ng-submit="submit()">
+        <div class="bodyContent">
+          <div class="heading-block"><h2>Create Story</h2></div>
+          
+          <div class="row">
+            <div class="col-sm-8 col-left">
+
+                <div class="form-group">
+                    <label class="pull-left pd10r">Headline <em>*</em> </label>
+                    <div class="pull-left headline-check">
+                        <span class="pd10r">use as:  </span> 
+                        
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="cbSync_AbridgedInfo_Headline" name="checkbox"  checked="checked"> Abridged Title
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="cbSync_Seo_Title" name="checkbox"  checked="checked"> Browser Title
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="checkbox" id="cbSync_Seo_PageUrl" checked="checked"> Page URL
+                            </label>
+                     </div>
+                    <div class="clear"></div>
+                    <input ng-model="story.headline" required autofocus type="text" value="" name="Headline" class="form-control">
+                    <p class="help-block error" ng-show="(StoryAddForm.$submitted || StoryAddForm.Headline.$touched) && StoryAddForm.Headline.$error.required">This field is required.</p>
+                </div>
+                <div class="form-group" id="AbridgedInfo_Headline" style="display: none">
+                    <label class="pull-left">Abridged Title</label>
+                    <div class="pull-left">
+                        <label class="checkbox-inline">
+                            <input ng-model="story.abridgedinfo.isclickable" type="radio"  value="true"> Clickable
+                        </label>
+                        <label class="checkbox-inline">
+                            <input ng-model="story.abridgedinfo.isclickable" type="radio"  value="false"> Static
+                        </label>
+                    </div>
+                    <div class="clear"></div>
+                    <input ng-model="story.abridgedinfo.headline" type="text"  class="form-control">
+                </div>
+                <div class="form-group" id="Seo_Title" style="display: none">
+                    <label>Browser Title <span data-toggle="tooltip" data-placement="top" title="Appears in title bar of browser window. Define who you are, where you are and what you offer (64 char max)."><i class="fa fa-info-circle colblue"></i></span></label>
+                    <input ng-model='story.abridgedinfo.summary' type="text" value="" name="" class="form-control">
+                </div>
+                <div class="form-group" id="Seo_PageUrl" style="display: none">
+                    <label>Page URL</label>
+                    <input  type="text" class="form-control">
+                </div>
+                
+                
+                <div class="form-group">
+                    <label>Section Title</label>
+                    <input ng-model="story.sectionTitle" type="text" value="" name="" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Content Classification <em>*</em></label>
+                    <select ui-select2="{ allowClear: true}" ng-model="story.contentclassifications.contentclassification.id" data-placeholder="Select Classification" name="Classification">
+                        <option></option>
+                        <option ng-repeat="classification in classificationList| filter:q as results" value="{{classification.id}}">{{classification.description}}</option>                        
+                    </select>
+                    <p class="help-block error" ng-show="(StoryAddForm.$submitted || StoryAddForm.Classification.$touched) && StoryAddForm.Classification.$error.required">This field is required.</p>
+                </div>
+                
+                <div class="form-group">
+                     <label> Body <em>*</em></label>
+                     <textarea ui-tinymce="tinymceOptions" ng-model="story.bodytext"></textarea>
+                </div>
+                <section class="boxed-default" id="datetimediv">
+                    <div class="boxed-header"><div title="Click to toggle" class="handlediv"></div><h4>Date/Time Properties</h4></div>
+                    <div class="boxed-body">
+                        <div>
+                            <label class="field-title">Sort By Date <span data-toggle="tooltip" data-placement="top" title="Date by which this item will be sorted by in the Producer & on your site:  UPDATED - Date that item was changed. (Can be altered at any time.) LAST EDITED - System time noting last time item was changed. (Cannot be altered.) PUBLISHED - Date item was created. (Can be altered at any time.)"><i class="fa fa-info-circle colblue"></i></span></label>
+                            <label class="checkbox-inline">
+                                <input ng-model="checkboxDatetime.sort" value="updated" type="radio" name="radio"> Updated 
+                            </label>
+                            <label class="checkbox-inline">
+                                <input ng-model="checkboxDatetime.sort"  type="radio" checked="" value="lastEdit" name="radio"> Last Edited 
+                            </label>
+                            <label class="checkbox-inline">
+                                <input ng-model="checkboxDatetime.sort" type="radio" checked="" value="published" name="radio"> Published 
+                            </label>
+                        </div>
+                        
+                        <b>Date/Time Stamp</b>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Story Body</th>
+                                        <th>Summary</th>
+                                        <th>Override</th>
+                                        <th>Display</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Published</td>
+                                        <td><input ng-model="checkboxDatetime.published.body" type="checkbox"></td>
+                                        <td><input type="checkbox" ng-model="checkboxDatetime.published.summary"></td>
+                                        <td><input type="checkbox" ng-model="checkboxDatetime.published.override"></td>
+                                        <td><span><b>Posted : </b> Date / Time</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Updated</td>
+                                        <td><input type="checkbox" ng-model="checkboxDatetime.updated.body"></td>
+                                        <td><input type="checkbox" ng-model="checkboxDatetime.updated.summary"></td>
+                                        <td><input type="checkbox" ng-model="checkboxDatetime.updated.override"></td>
+                                        <td><span><b>Updated: </b> Date / Time</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                 </section>
+                
+                <section class="boxed-default" id="storyPropertiediv">
+                    <div class="boxed-header"><div title="Click to toggle" class="handlediv"></div><h4>Alignment, Byline, Geo & Dateline</h4></div>
+                    <div class="boxed-body">
+                        <div class="blockfield">
+                            <label class="pd10r">Align Related Content <span title="" data-placement="top" data-toggle="tooltip" data-original-title="Aligns Story Body Graphics, Ads, Featured Video, Associated Links and the related content to the left or the right of the Story Body Text"><i class="fa fa-info-circle colblue"></i></span></label>
+                            <label class="radio-inline">
+                                <input ng-model="story.relatedcontentalignment" value="right" type="radio" > Right 
+                            </label>
+                            <label class="radio-inline">
+                                <input  ng-model="story.relatedcontentalignment" value="left" type="radio" > Left 
+                            </label>   
+                        </div>
+                        <div class="blockfield">
+                            <p><label>Bylines <span title="" data-placement="top" data-toggle="tooltip" data-original-title="Maximum of 10 Bylines can be associated to this feature. Displays only in RSS feeds and used in site search indexing."><i class="fa fa-info-circle colblue"></i></span></label></p>
+                            <div class="mar5tb row">
+                                <div class="col-sm-3">
+                                	<select ui-select2="{ allowClear: true}" ng-model="story.publisher" data-placeholder="Author" name="Author" >
+                                		<option></option>
+                                		<option ng-repeat="publisher in publisherList| filter:q as results" value="{{publisher.id}}">{{publisher.name}}</option>
+                                    </select>
+                                 
+                                </div>
+                                <div class="col-sm-7 pd0l">
+                                	<select ui-select2="{ allowClear: true}" ng-model="story.associationbylines.associationbyline.prefix" data-placeholder="Choose an option ..." name="Byline" >
+                                        <option></option>
+                                        <option ng-repeat="byline in bylineList| filter:q as results" value="{{byline.id}}">{{byline.title}}</option>
+                                     </select>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-default"> <i class="fa fa-plus"></i> Add </a>
+                        </div>
+                        
+                        <div class="blockfield">
+                            <p><label>Geo-Locations <span title="" data-placement="top" data-toggle="tooltip" data-original-title="For best results, enter (Address, City, State), (Address, City, ZIP), or (Longitude and Latitude coordinates). Used only in site search indexing."><i class="fa fa-info-circle colblue"></i></span></label></p>
+                            <input ng-model="story.geolocations.geolocation.text" type="text" name="GeoLocation" class="form-control mar5b">
+                            <a href="#" class="btn btn-default"> <i class="fa fa-plus"></i> Add </a>
+                        </div>
+                        <div class="blockfield">
+                            <p><label>Dateline <span title="" data-placement="top" data-toggle="tooltip" data-original-title="Aligns Story Body Graphics, Ads, Featured Video, Associated Links and the related content to the left or the right of the Story Body Text"><i class="fa fa-info-circle colblue"></i></span></label></p>
+                            <div class="col-sm-7 pd0l mar5b">
+                            		<select ui-select2="{ allowClear: true}" ng-model="story.associationdateline.dateline.id" data-placeholder="Choose an option ..." name="Dateline" >
+                                    	<option></option>
+                                        <option ng-repeat="dateline in datelineList| filter:q as results" value="{{dateline.id}}">{{dateline.title}}</option>
+                                        <!-- <option>03/13/2015</option>
+                                        <option>03/6/2015</option>
+                                        <option>03/7/2015</option> -->
+                                     </select>
+                            </div>
+                            <div class="clear"></div>
+                            <button type="button" class="btn btn-primary"> <i class="fa fa-plus"></i> New Dateline </button>
+                        </div>
+                    </div>
+                </section>
+                <section class="boxed-default" id="graphicsdiv">
+                    <div class="boxed-header"><div title="Click to toggle" class="handlediv"></div><h4>Graphics</h4></div>
+                    <div class="boxed-body">
+                        <button class="btn btn-primary" type="button"> <i class="fa fa-camera"></i> Add Image </button> 
+                    </div>
+                 </section>
+                
+                <section class="boxed-default" id="abstractdiv">
+                    <div class="boxed-header"><div title="Click to toggle" class="handlediv"></div><h4>Abstract</h4></div>
+                    <div class="boxed-body">
+                        <div class="mar5b">
+                            <b>use as:  </b>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" checked="" value="" name="checkbox"> Abridged Text 
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" checked="" value="" name="checkbox"> SEO Description 
+                            </label>
+                        </div>
+                       <div class="field-title">
+                                <p class="pull-left">
+                                    <label>Summary Text  </label> <span> &nbsp; (500 character max.)</span> 
+                                </p>
+                                <span class="pull-right">Remaining Characters: 160</span>
+                                <div class="clear"></div> 
+                        </div>
+                        <textarea ui-tinymce="tinymceOptions" ng-model="story.summary.text"></textarea>
+                    </div>
+                 </section>
+                
+                <section class="boxed-default" id="seodiv">
+                    <div class="boxed-header"><div title="Click to toggle" class="handlediv"></div><h4>SEO</h4></div>
+                    <div class="boxed-body">
+                        <div class="blockfield">
+                            <div class="field-title">
+                                <p class="pull-left"><label>Topics  <span title="" data-placement="top" data-toggle="tooltip" data-original-title="Maximum of 25 topics can be associated to the feature. Displays only in RSS feeds and used in site search indexing."><i class="fa fa-info-circle colblue"></i></span></label> <span> &nbsp; (25 topics max.)</span></p>
+                                <div class="pull-left mar5l">
+                                    <b>use as:  </b>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="checkbox" value="" checked=""> Keywords 
+                                    </label>
+                                    
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+
+                            <select ui-select2="{ allowClear: true}" ng-model="story.seo.title" data-placeholder="Choose an option ..." name="Byline" tabindex="-1" aria-hidden="true" >
+                            	<option></option>
+                            	<option ng-repeat="topic in topicList| filter:q as results" value="{{topic.title}}">{{topic.title}}</option>  
+                             </select>
+                            <button type="button" class="btn btn-primary btn-add"> <i class="fa fa-plus"></i> New Topic</button>
+                        </div>
+                        
+                        <div class="blockfield">
+                            <div class="field-title">
+                                <p class="pull-left"><label>Description  <span title="" data-placement="top" data-toggle="tooltip" data-original-title="Appears in search result list. Summarize the content of this story in complete sentences. 170 – 200 characters recommended."><i class="fa fa-info-circle colblue"></i></span></label> <span> &nbsp; (200 character max.)</span></p>
+                                <span class="pull-right">Remaining Characters: 160</span>
+                                <div class="clear"></div>
+                            </div>
+                            <textarea ng-model="story.seo.description"  rows="4" name="seoDescription"  id="seoDescription"   class="textareaFull">{{story.seo.description}}</textarea>
+                        </div>
+                        <div class="blockfield">
+                            <div class="field-title">
+                                <p class="pull-left"><label>Keywords <span title="" data-placement="top" data-toggle="tooltip" data-original-title="Not visible to end user. Help search engines define this story in 10 – 15 words."><i class="fa fa-info-circle colblue"></i></span></label> <span>&nbsp; (200 character max.)</span></p>
+                                <span class="pull-right">Remaining Characters: 160</span>
+                                <div class="clear"></div>
+                            </div>
+                            <textarea ng-model="story.seo.keywords" rows="4" name="seoDescription"  id="seoDescription"   class="textareaFull">{{story.seo.keywords}}</textarea>
+                        </div>
+                        <div class="blockfield">
+                            <label class="pd10r">Robots <span data-original-title="INDEX – Allow search engines to index this story. FOLLOW – Allow search engines to index pages linked to this story. ARCHIVE – Allow search engines to save a cached version of this story. (Changes saved to this story will not be immediately reflected in search engine results.)" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-info-circle colblue"></i></span></label>
+                            <label class="checkbox-inline">
+                                <input ng-model="checkboxRobot.indexValue" type="checkbox" ng-true-value="'Index'" ng-false-value="''"> Index 
+                            </label>
+                            <label class="checkbox-inline">
+                                <input ng-model="checkboxRobot.follow" type="checkbox" ng-true-value="'Follow'" ng-false-value="''"> Follow 
+                            </label>
+                            <label class="checkbox-inline">
+                                <input ng-model="checkboxRobot.archive" type="checkbox" ng-true-value="'Archive'" ng-false-value="''"> Archive 
+                            </label>
+                            
+                        </div>
+                    </div>
+                 </section>
+                <section class="boxed-default" id="associatedLinksdiv">
+                    <div class="boxed-header"><div title="Click to toggle" class="handlediv"></div><h4>Associated links</h4></div>
+                    <div class="boxed-body">
+                        <div class="form-horizontal bg-gray">
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label"> Name <em>*</em></label>
+                                <div class="col-sm-10">
+                                  <input ng-model="story.associatedlinks.associatedlink[0].name" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label"> Url <em>*</em></label>
+                                <div class="col-sm-10">
+                                  <input ng-model="story.associatedlinks.associatedlink[0].url" type="text" class="form-control">
+                                </div>
+                              </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2"></label>
+                                <div class="col-sm-10">
+                                  <p class="pull-left"><label>Open in new window <input ng-model="story.associatedlinks.associatedlink[0].newwindow" type="checkbox" ng-true-value="'true'" ng-false-value="'false'" name="linkWindow" class="check-box" checked="checked"></label></p>
+                                  <p class="pull-right"><a href="#"><i class="fa fa-remove"></i> Remove</a></p>
+                                </div>
+                              </div>   
+                        </div>
+                        <a href="#" class="btn btn-primary"> <i class="fa fa-plus"></i> Add </a>  
+                    </div>
+                 </section>
+                <section class="boxed-default" id="rulesdiv">
+                    <div class="boxed-header"><div title="Click to toggle" class="handlediv"></div><h4>Rules</h4></div>
+                    <div class="boxed-body">
+                        <p><a href="#" class="add-all">Add All</a> <span> | </span> <a class="remove-all" href="#">Remove All</a></p>
+                        <div class="mar5tb">
+                            <select multiple="multiple" ui-select2="{ allowClear: true}" ng-model="story.rule" data-placeholder="Choose an option ..." name="Rule">
+                                <option ng-repeat="rule in ruleList| filter:q as results" value="{{rule.id}}">{{rule.title}}</option>                        
+                            </select>
+                        </div>
+                        <a href="#" class="btn btn-primary">View Execution Log</a>
+                    </div>
+                </section>
+                
+                
+                <section class="boxed-default" id="taxonomydiv">
+                    <div class="boxed-header"><div title="Click to toggle" class="handlediv"></div><h4>Taxonomy</h4></div>
+                    <div class="boxed-body">
+                        <div class="field-title">
+                                <p><label>Taxonomy <span data-original-title="Only one taxonomy per story." data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-info-circle colblue"></i></span></label></p>   
+                        </div>
+                       	<select ui-select2="{ allowClear: true}" ng-model="story.taxonomy" data-placeholder="Choose an option ..." name="Taxonomy">
+                            <option></option>
+                            <option ng-repeat="taxonomy in taxonomyList| filter:q as results" value="{{taxonomy.id}}">{{taxonomy.title}}</option>                        
+                        </select>
+                    </div>
+                 </section>
+                <section class="boxed-default" id="headerBrandingdiv">
+                    <div class="boxed-header"><div title="Click to toggle" class="handlediv"></div><h4>Branding & Header Image</h4></div>
+                    <div class="boxed-body">
+                        <button class="btn btn-primary" type="button"> <i class="fa fa-camera"></i> Add Image </button>   
+                    </div>
+                 </section>
+                
+                <section class="boxed-default" id="notediv">
+                    <div class="boxed-header"><div title="Click to toggle" class="handlediv"></div><h4>Notes</h4></div>
+                    <div class="boxed-body">
+                        <div class="field-title">
+                            <p class="pull-left"><label>Notes</label> <span>(500 character max.)</span></p>
+                            <span class="pull-right">Remaining Characters: 500</span>
+                            <div class="clear"></div>
+                        </div>
+                        <textarea ng-model="story.associationcontenttags.associationcontenttag.contenttag.headline" rows="4" name="Comments" maxlength="500" id="Comments"   class="textareaFull">{{story.associationcontenttags.associationcontenttag.contenttag.headline}}</textarea>
+                    </div>
+                 </section>
+                
+            </div>
+              <div class="col-sm-4 col-right">
+                  <div class="sticky">   
+                    <section class="boxed-default">
+                    <div class="boxed-header"><h4>Toolbar</h4></div>
+                    <div class="boxed-body">
+                        <h5 class="headdingh5 pull-left pd10r">Story Status : </h5>
+                        
+                         <div class="mar5b pull-left">
+                         	<select ui-select2="{ allowClear: true}" ng-model="story.status" data-placeholder="Choose an option ..." name="Status">
+                                <option value="Draft">Draft</option>
+                                <option value="Live" selected="selected">Live</option>
+                                <option value="Archive">Archive</option>
+                            </select>   
+                             
+                        </div>
+                        <div class="clear"></div>
+                        <div class="row">
+                        	<div class="col-sm-8">
+                            	<select ui-select2 ng-model="aftersaveevent" name="aftersaveevent" data-placeholder="Save">
+                            		<option value=""></option>
+                            		<option ng-repeat="rule in ruleList| filter:q as results" value="{{rule.id}}">{{rule.title}}</option>
+                            	</select>
+                            </div>
+                            <div class="col-sm-4">
+                           		<button type="submit" class="btn btn-default btn-save">Save</button>
+                            </div>    
+                        </div>                                
+                        <h5 class="headdingh5">Story Security/Options</h5>
+                        <div class="format-checkbox">
+                            <label class="checkbox">
+                              <input ng-model="story.paywall.securitytype" type="checkbox" value="datetimediv" name="checkbox2" ng-true-value="'Secured'" ng-false-value="'No Secured'"> Show Implicit Content 
+                            </label>
+                            <label class="checkbox">
+                              <input type="checkbox" value="datetimediv" name="checkbox2"> Can Affiliate assign this
+                            </label>
+                            <label class="checkbox">
+                              <input type="checkbox" value="datetimediv" name="checkbox2"> Can Affiliate edit this
+                            </label>
+                        </div>
+                    </div>
+                 </section>
+                    <section class="boxed-default">
+                    <div class="boxed-header"><h4>Adjust View</h4></div>
+                    <div class="boxed-body">
+                        <div class="adv-settings" >
+                            <label class="checkbox">
+                              <input type="checkbox" name="checkbox2" value="datetimediv"> Date/Time Properties 
+                            </label>
+                            <label class="checkbox">
+                              <input type="checkbox" name="checkbox2" value="storyPropertiediv"> Alignment, Byline, Geo & Dateline 
+                            </label>
+                            
+                            <label class="checkbox">
+                              <input type="checkbox" name="checkbox2" value="graphicsdiv"> Graphics 
+                            </label>
+                            <label class="checkbox">
+                              <input type="checkbox" name="checkbox2" value="abstractdiv"> Abstract
+                            </label>
+                            <label class="checkbox">
+                              <input type="checkbox" name="checkbox2" value="seodiv"> SEO 
+                            </label>
+                            <label class="checkbox">
+                              <input type="checkbox" name="checkbox2" value="associatedLinksdiv"> Associated links 
+                            </label>
+                             <label class="checkbox">
+                              <input type="checkbox" name="checkbox2" value="rulesdiv"> Rules 
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="checkbox2" value="taxonomydiv"> Taxonomy 
+                            </label>
+                            <label class="checkbox">
+                              <input type="checkbox" name="checkbox2" value="headerBrandingdiv"> Branding & Header Image 
+                            </label>
+                            <label class="checkbox">
+                              <input type="checkbox" name="checkbox2" value="notediv"> Notes 
+                            </label>
+                        </div>
+                    </div>
+                   </section>
+                  </div>
+              </div>
+          </div>
+        
+        </div>
+        </form>
+    </div>
+</div>

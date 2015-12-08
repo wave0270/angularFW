@@ -1,0 +1,47 @@
+<div class="heading-block"><h5>Results Order</h5></div>
+<div class="form-group pdmb">
+	<label class="col-sm-3 col-xs-12">Sort First by</label>
+	<div class="col-xs-6 col-sm-4 col-md-3">
+		<div class="select-custom">
+			<select id="PrimeSort" class="form-control"
+				ng-model="searchobject.sortfirstby">
+				<option value="0">Last Edited Date</option>
+				<option value="1">Created Date</option>
+				<option value="2">Headline</option>
+				<option value="3">Publisher</option>
+			</select>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-4 col-md-3">
+		<div class="select-custom">
+			<select id="FirstOrder" class="form-control"
+				ng-model="searchobject.firstOrder">
+				<option selected="" value="ASC">Ascending</option>
+				<option value="DESC">Descending</option>
+			</select>
+		</div>
+	</div>
+</div>
+<div class="form-group pdmb">
+	<label class="col-sm-3 col-xs-12">Sort Second by</label>
+	<div class="col-xs-6 col-sm-4 col-md-3">
+		<div class="select-custom">
+			<select id="SecondSort" class="form-control"
+				ng-model="searchobject.sortSecondby">
+				<option value="LastEditedDate">Last Edited Date</option>
+				<option value="CreationDate">Created Date</option>
+				<option value="LastEditedBy">Publisher</option>
+				<option selected="" value="Headline">Headline</option>
+			</select>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-4 col-md-3">
+		<div class="select-custom">
+			<select name="SecondOrder" id="SecondOrder" class="form-control"
+				ng-model="searchobject.secondOrder">
+				<option selected="" value="ASC">Ascending</option>
+				<option value="DESC">Descending</option>
+			</select>
+		</div>
+	</div>
+</div>

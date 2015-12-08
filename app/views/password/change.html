@@ -1,0 +1,55 @@
+<div class="wploginForm frmResetPass">
+    <h1 class="headding-login">Change Password</h1>
+    <div ng-show="step === 'changePassword'">
+        <form name="frm" class="form-horizontal frm-resetPass" method="post" autocomplete="off" ng-submit="submit();" novalidate>
+            <div class="form-group" ng-class="{ 'has-error': (frm.$submitted || frm.oldPassword.$touched) && frm.oldPassword.$invalid}">
+                <label for="oldPassword" class="col-xs-4 col-sm-4 control-label">Old Password</label>
+                <div class="col-xs-8 col-sm-8">
+                    <div class="itemField">
+                        <i class="fa fa-key"></i>
+                        <input type="password" name="oldPassword" id="oldPassword" ng-model="oldPassword" class="form-control" required="" ng-minlength="6" autocomplete="off"/>
+                    </div>
+                    <p class="help-block error" ng-show="(frm.$submitted || frm.oldPassword.$touched) && frm.oldPassword.$error.required">{{constant.FORM_ERROR_REQUIRED}}</p>
+                    <p class="help-block error" ng-show="(frm.$submitted || frm.oldPassword.$touched) && frm.oldPassword.$error.minlength">{{constant.FORM_ERROR_PASSWORD_MIN_LENGTH_6}}</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': (frm.$submitted || frm.newPassword.$touched) && frm.newPassword.$invalid}">
+                <label for="newPassword" class="col-xs-4 col-sm-4 control-label">New Password</label>
+                <div class="col-xs-8 col-sm-8">
+                    <div class="itemField">
+                        <i class="fa fa-key"></i>
+                        <input type="password" name="newPassword" id="newPassword" ng-model="newPassword" class="form-control" required="" ng-minlength="6" autocomplete="off"/>
+                    </div>
+                    <p class="help-block error" ng-show="(frm.$submitted || frm.newPassword.$touched) && frm.newPassword.$error.required">{{constant.FORM_ERROR_REQUIRED}}</p>
+                    <p class="help-block error" ng-show="(frm.$submitted || frm.newPassword.$touched) && frm.newPassword.$error.minlength">{{constant.FORM_ERROR_PASSWORD_MIN_LENGTH_6}}</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': (frm.$submitted || frm.repeatPassword.$touched) && frm.repeatPassword.$invalid}">
+                <label for="newpassword" class="col-xs-4 col-sm-4 control-label">Confirm New Password</label>
+                <div class="col-xs-8 col-sm-8">
+                    <div class="itemField">
+                        <i class="fa fa-key"></i>
+                        <input type="password" name="repeatPassword" ng-model="repeatPassword" class="form-control" required="" ng-minlength="6" ng-compare="newPassword" autocomplete="off"/>
+                    </div>
+                    <p class="help-block error" ng-show="(frm.$submitted || frm.repeatPassword.$touched) && frm.repeatPassword.$error.required">{{constant.FORM_ERROR_REQUIRED}}</p>
+                    <p class="help-block error" ng-show="(frm.$submitted || frm.repeatPassword.$touched) && frm.repeatPassword.$error.minlength">{{constant.FORM_ERROR_PASSWORD_MIN_LENGTH_6}}</p>
+                    <p class="help-block error" ng-show="(frm.$submitted || frm.repeatPassword.$touched) && frm.newPassword.$valid && frm.repeatPassword.$error.ngcompare">{{constant.FORM_ERROR_PASSWORDS_DO_NOT_MATCH}}</p>
+                </div>
+            </div>
+            <div class="form-group has-error" ng-show="frm.$submitted && error">
+                <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9">
+                    <p class="help-block error">{{error}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class=" col-xs-12 col-sm-offset-4 col-sm-8">
+                    <button type="submit" class="btn btn-submit" ladda="loading">Change Password</button>
+                    <button type="button" class="btn btn-submit bnt-cancel" ng-click="cancel();">Cancel</button>
+                </div>
+            </div> 
+        </form>
+    </div>
+    <div ng-show="step === 'success'">
+        <p class="text-center">Your password has been changed successfully.</p>
+    </div>
+</div>
